@@ -77,7 +77,7 @@ namespace vsgvr {
       matrix = matrix * viewAxesMat * worldRotateMat;
     }
 
-    vsg::dmat4 transform() const override { return matrix; }
+    vsg::dmat4 transform(const vsg::dvec3& offset = {}) const override { return matrix; }
     vsg::dmat4 matrix;
   };
 }

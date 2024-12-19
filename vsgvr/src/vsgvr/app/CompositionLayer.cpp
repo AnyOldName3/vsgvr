@@ -402,8 +402,7 @@ namespace vsgvr {
       recordAndSubmitTask->queue = device->getQueue(deviceQueueFamily.queueFamily);
       _recordAndSubmitTasks.emplace_back(recordAndSubmitTask);
 
-      recordAndSubmitTask->earlyTransferTask->transferQueue = device->getQueue(transferQueueFamily);
-      recordAndSubmitTask->lateTransferTask->transferQueue = device->getQueue(transferQueueFamily);
+      recordAndSubmitTask->transferTask->transferQueue = device->getQueue(transferQueueFamily);
     }
   }
 
@@ -532,13 +531,9 @@ namespace vsgvr {
           // task->databasePager->compileManager = compileManager;
         }
 
-        if (task->earlyTransferTask)
+        if (task->transferTask)
         {
-          task->earlyTransferTask->assign(resourceRequirements.earlyDynamicData);
-        }
-        if (task->lateTransferTask)
-        {
-          task->lateTransferTask->assign(resourceRequirements.lateDynamicData);
+          task->transferTask->assign(resourceRequirements.dynamicData);
         }
       }
 
